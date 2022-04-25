@@ -40,4 +40,16 @@ public class TodoListItem {
             return Collections.emptyList();
         }
     }
+
+    @Override
+    public String toString() {
+        return "TodoListItem{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", completed=" + completed +
+                ", order=" + order +
+                '}';
+    }
+
+
 }
