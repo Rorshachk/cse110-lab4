@@ -2,6 +2,17 @@ package com.example.lab5;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.room.Dao;
+import androidx.room.Database;
+import androidx.room.Delete;
+import androidx.room.Entity;
+import androidx.room.Insert;
+import androidx.room.PrimaryKey;
+import androidx.room.Query;
+import androidx.room.RoomDatabase;
+import androidx.room.Update;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -14,13 +25,18 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+@Entity(tableName =  "todo_list_items")
 public class TodoListItem {
+
+    @PrimaryKey(autoGenerate = true)
     public long id = 0;
+
+    @NonNull
     public String text;
     public boolean completed;
     public int order;
 
-    TodoListItem(String text, boolean completed, int order){
+    TodoListItem(@NonNull String text, boolean completed, int order){
         this.text = text;
         this.completed = completed;
         this.order = order;
@@ -50,6 +66,7 @@ public class TodoListItem {
                 ", order=" + order +
                 '}';
     }
-
-
 }
+
+
+
