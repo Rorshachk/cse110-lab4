@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab5">
         <activity
+            android:name=".TodoListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
