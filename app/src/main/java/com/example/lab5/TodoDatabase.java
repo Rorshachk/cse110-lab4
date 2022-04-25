@@ -6,5 +6,5 @@ import androidx.room.RoomDatabase;
 
 @Database(entities = {TodoListItem.class}, version =1)
 public  abstract class TodoDatabase extends RoomDatabase {
-    public  abstract  TodoListItem todoListItem();
+    public  abstract  TodoListItemDao todoListItemDao();
 }
