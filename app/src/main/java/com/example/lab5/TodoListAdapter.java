@@ -15,7 +15,7 @@ import java.util.List;
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHolder> {
     private List<TodoListItem> todoItems = Collections.emptyList();
 
-    public  void setTodoItems(List<TodoListItem> newTodoItems){
+    public void setTodoListItems(List<TodoListItem> newTodoItems){
         this.todoItems.clear();
         this.todoItems = newTodoItems;
         notifyDataSetChanged();
