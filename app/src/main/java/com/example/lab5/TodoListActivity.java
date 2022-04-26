@@ -18,8 +18,12 @@ public class TodoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
 
+        TodoListItemDao todoListItemDao = TodoDatabase.getSingleton(this).todoListItemDao();
+        List<TodoListItem> todoListItems = todoListItemDao.getAll();
+
         TodoListAdapter adapter = new TodoListAdapter();
         adapter.setHasStableIds(true);
+        adapter.setTodoListItems(todoListItems);
 
         recyclerView = findViewById(R.id.todo_items);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

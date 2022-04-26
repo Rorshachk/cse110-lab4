@@ -13,6 +13,8 @@ public  interface  TodoListItemDao{
     @Insert
     long insert(TodoListItem todoListItem);
 
+    @Insert
+    List<Long> insertAll(List<TodoListItem> todoListItem);
 
     @Query("SELECT * FROM `todo_list_items` WHERE `id`=:id")
     TodoListItem get(long id);
