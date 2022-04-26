@@ -2,6 +2,7 @@ package com.example.lab5;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.lifecycle.Lifecycle;
@@ -60,6 +61,29 @@ public class TodoListActivityTest {
 
             TodoListItem editedItem = todoListItemDao.get(id);
             assertEquals(newText, editedItem.text);
+        });
+    }
+
+    @Test
+    public void testAddNewTodo(){
+        String newText = "Ensure all tests pass";
+        ActivityScenario<TodoListActivity> scenario = ActivityScenario.launch(TodoListActivity.class);
+        scenario.moveToState(Lifecycle.State.CREATED);
+        scenario.moveToState(Lifecycle.State.STARTED);
+        scenario.moveToState(Lifecycle.State.RESUMED);
+
+        scenario.onActivity(activity -> {
+            List<TodoListItem> beforeTodoList = todoListItemDao.getAll();
+
+            EditText newTodoText = activity.findViewById(R.id.new_todo_text);
+            Button addTodoButton = activity.findViewById(R.id.add_todo_btn);
+
+            newTodoText.setText(newText);
+            addTodoButton.performClick();
+
+            List<TodoListItem> aftertodoList = todoListItemDao.getAll();
+            assertEquals(beforeTodoList.size()+1, aftertodoList.size());
+            assertEquals(newText, aftertodoList.get(aftertodoList.size()-1).text);
         });
     }
 }
