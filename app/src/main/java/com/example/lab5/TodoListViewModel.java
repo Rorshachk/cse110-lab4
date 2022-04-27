@@ -30,11 +30,11 @@ public class TodoListViewModel extends AndroidViewModel {
         todoListItemDao.update(todoListItem);
     }
 
-//    public void createTodo(String text){
-//        int endOfListOrder = ???;
-//        TodoListItem newItem = new TodoListItem(text, false, endOfListOrder);
-//        todoListItemDao.update(newItem);
-//    }
+    public void createTodo(String text){
+        int endOfListOrder = todoListItemDao.getOrderForAppend();
+        TodoListItem newItem = new TodoListItem(text, false, endOfListOrder);
+        todoListItemDao.update(newItem);
+    }
 
     public LiveData<List<TodoListItem>> getTodoListItems(){
         if (todoListItems == null){
