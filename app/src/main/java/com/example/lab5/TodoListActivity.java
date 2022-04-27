@@ -1,6 +1,7 @@
 package com.example.lab5;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,18 +19,25 @@ public class TodoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
 
-        TodoListItemDao todoListItemDao = TodoDatabase.getSingleton(this).todoListItemDao();
-        List<TodoListItem> todoListItems = todoListItemDao.getAll();
+        TodoListViewModel viewModel = new ViewModelProvider(this)
+                .get(TodoListViewModel.class);
 
         TodoListAdapter adapter = new TodoListAdapter();
-        adapter.setHasStableIds(true);
-        adapter.setTodoListItems(todoListItems);
+        viewModel.getTodoListItems().observe(this, adapter::setTodoListItems);
+
+
+//        TodoListItemDao todoListItemDao = TodoDatabase.getSingleton(this).todoListItemDao();
+//        List<TodoListItem> todoListItems = todoListItemDao.getAll();
+//
+//        TodoListAdapter adapter = new TodoListAdapter();
+//        adapter.setHasStableIds(true);
+//        adapter.setTodoListItems(todoListItems);
 
         recyclerView = findViewById(R.id.todo_items);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        adapter.setTodoListItems(TodoListItem.loadJSON(this, "demo_todos.json"));
+//        adapter.setTodoListItems(TodoListItem.loadJSON(this, "demo_todos.json"));
 
 //        List<TodoListItem> todos = TodoListItem.loadJSON(this, "demo_todos.json");
 //        Log.d("TodoListActivity", todos.toString());
