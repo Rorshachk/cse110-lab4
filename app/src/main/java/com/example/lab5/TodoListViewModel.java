@@ -25,6 +25,10 @@ public class TodoListViewModel extends AndroidViewModel {
         todoListItemDao.update(todoListItem);
     }
 
+    public void deleteItem(TodoListItem todoListItem){
+        todoListItemDao.delete(todoListItem);
+    }
+
     public void updateText(TodoListItem todoListItem, String newText){
         todoListItem.text = newText;
         todoListItemDao.update(todoListItem);
