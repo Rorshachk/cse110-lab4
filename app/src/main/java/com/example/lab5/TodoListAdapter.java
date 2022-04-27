@@ -13,14 +13,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHolder> {
     private List<TodoListItem> todoItems = Collections.emptyList();
+    private Consumer<TodoListItem> onCheckBoxClicked;
+    private BiConsumer<TodoListItem, String> onTextEditedHandler;
 
     public void setTodoListItems(List<TodoListItem> newTodoItems){
         this.todoItems.clear();
         this.todoItems = newTodoItems;
         notifyDataSetChanged();
+    }
+
+    public void setOnCheckBoxClickedHandler(Consumer<TodoListItem> onCheckBoxClicked){
+        this.onCheckBoxClicked = onCheckBoxClicked;
+    }
+
+    public void setOnTextEditedHandler(BiConsumer<TodoListItem, String> onTextEdited){
+        this.onTextEditedHandler = onTextEdited;
     }
 
     @NonNull
@@ -54,6 +66,17 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
             super(itemView);
             this.textView = itemView.findViewById(R.id.todo_item_text);
             this.checkBox = itemView.findViewById(R.id.completed);
+
+            this.checkBox.setOnClickListener(view -> {
+                if(onCheckBoxClicked == null) return ;
+                onCheckBoxClicked.accept(todoItem);
+            });
+
+            this.textView.setOnFocusChangeListener((view, hasFocus) -> {
+                if(!hasFocus){
+                    onTextEditedHandler.accept(todoItem, textView.getText().toString());
+                }
+            });
         }
 
         public TodoListItem getTodoItem() {

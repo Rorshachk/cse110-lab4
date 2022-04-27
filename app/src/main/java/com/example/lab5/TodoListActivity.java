@@ -23,6 +23,8 @@ public class TodoListActivity extends AppCompatActivity {
                 .get(TodoListViewModel.class);
 
         TodoListAdapter adapter = new TodoListAdapter();
+        adapter.setOnCheckBoxClickedHandler(viewModel::toggleCompleted);
+        adapter.setOnTextEditedHandler(viewModel::updateText);
         viewModel.getTodoListItems().observe(this, adapter::setTodoListItems);
 
 

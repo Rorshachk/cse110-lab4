@@ -20,6 +20,22 @@ public class TodoListViewModel extends AndroidViewModel {
         todoListItemDao = db.todoListItemDao();
     }
 
+    public void toggleCompleted(TodoListItem todoListItem){
+        todoListItem.completed = !todoListItem.completed;
+        todoListItemDao.update(todoListItem);
+    }
+
+    public void updateText(TodoListItem todoListItem, String newText){
+        todoListItem.text = newText;
+        todoListItemDao.update(todoListItem);
+    }
+
+//    public void createTodo(String text){
+//        int endOfListOrder = ???;
+//        TodoListItem newItem = new TodoListItem(text, false, endOfListOrder);
+//        todoListItemDao.update(newItem);
+//    }
+
     public LiveData<List<TodoListItem>> getTodoListItems(){
         if (todoListItems == null){
             loadUsers();
