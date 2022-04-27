@@ -28,10 +28,7 @@ public class TodoListActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this)
                 .get(TodoListViewModel.class);
-//        this.newTodoText = this.findViewById(R.id.new_todo_text);
-//        this.addTodoButton = this.findViewById(R.id.add_todo_btn);
 
-        // addTodoButton.setOnClickListener(this::onAddTodoClicked);
 
         TodoListAdapter adapter = new TodoListAdapter();
         adapter.setHasStableIds(true);
@@ -55,6 +52,9 @@ public class TodoListActivity extends AppCompatActivity {
 
 //        List<TodoListItem> todos = TodoListItem.loadJSON(this, "demo_todos.json");
 //        Log.d("TodoListActivity", todos.toString());
+        this.newTodoText = this.findViewById(R.id.new_todo_text);
+        this.addTodoButton = this.findViewById(R.id.add_todo_btn);
+        addTodoButton.setOnClickListener(this::onAddTodoClicked);
     }
 
     private void onAddTodoClicked(View view) {
